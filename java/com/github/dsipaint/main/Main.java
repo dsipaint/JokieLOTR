@@ -4,9 +4,10 @@ import javax.security.auth.login.LoginException;
 import com.github.dsipaint.listeners.CommandListener;
 import com.github.dsipaint.listeners.StopListener;
 
-import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.requests.GatewayIntent;
+import net.dv8tion.jda.api.utils.MemberCachePolicy;
 
 public class Main
 {
@@ -18,7 +19,10 @@ public class Main
 	{
 		try
 		{
-			jda = new JDABuilder(AccountType.BOT).setToken("").build();
+			jda = JDABuilder.createDefault("")
+					.enableIntents(GatewayIntent.GUILD_MEMBERS)
+					.setMemberCachePolicy(MemberCachePolicy.ALL)
+					.build();
 		}
 		catch (LoginException e)
 		{
